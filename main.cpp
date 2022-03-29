@@ -1,12 +1,11 @@
-#pragma clang diagnostic push
-#pragma ide diagnostic ignored "cppcoreguidelines-narrowing-conversions"
-// clazy:skip
 #include <QApplication>
 #include <QHBoxLayout>
 #include <QPushButton>
 #include <fstream>
 #include <vector>
 using namespace std;
+
+
 int main(int argc, char *argv[]){
     ifstream fin("sequence.txt");
     int n;
@@ -20,6 +19,7 @@ int main(int argc, char *argv[]){
     fin.close();
     QApplication app(argc,argv);
     QWidget window;
+    window.setWindowTitle("Matrix");
     string bnum;
     for (int j = 0; j < n; j++){
         for (int i = 0; i < sequence[j].size(); i++){
@@ -36,9 +36,9 @@ int main(int argc, char *argv[]){
     }
     auto *save = new QPushButton("Сохранить", &window);
     save->setGeometry(0, 31 * n, 80, 30);
-    QObject::connect(save, &QPushButton::clicked, [n, &sequence](){
+    QObject::connect(save, &QPushButton::clicked, [&sequence](){
         ofstream fout("sequence.txt");
-        for (int i = 0; i < n; i++){ fout << sequence[i] << endl; }
+        for (int i = 0; i < sequence.size(); i++){ fout << sequence[i] << endl; }
         fout.close();
     });
     window.show();

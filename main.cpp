@@ -4,8 +4,6 @@
 #include <fstream>
 #include <vector>
 using namespace std;
-
-
 int main(int argc, char *argv[]){
     ifstream fin("sequence.txt");
     int n;
@@ -38,7 +36,9 @@ int main(int argc, char *argv[]){
     save->setGeometry(0, 31 * n, 80, 30);
     QObject::connect(save, &QPushButton::clicked, [&sequence](){
         ofstream fout("sequence.txt");
-        for (int i = 0; i < sequence.size(); i++){ fout << sequence[i] << endl; }
+        for (int i = 0; i < sequence.size(); i++){
+            fout << sequence[i] << endl;
+        }
         fout.close();
     });
     window.show();
